@@ -11,6 +11,7 @@ When evaluating a repository, follow this three-step process:
 Determine if the repository is a valid candidate for IvoryOS.
 - **Criteria**: Is the repository an instrument controller (e.g., hardware driver) or a data processing module?
 - **Format**: Is it written using Python classes?
+- **User-facing Methods** The classes expose public methods intended for users to call.
 - **Action**: If it meets these criteria, proceed to Step 2. If it is irrelevant (e.g., a generic web framework, unstructured scripts without classes, or non-Python code), mark it as incompatible and halt the evaluation.
 
 ## Step 2: Compatibility Evaluation
