@@ -110,13 +110,41 @@ Generate a CSV table with the following columns (derived from the `public.module
 | `python_versions` | text[] | Supported Python versions (e.g., `3.9,3.10`) |
 | `is_tested_with_ivoryos`| boolean | `true` if tested with IvoryOS, otherwise `false` |
 | `is_unlisted` | boolean | Typically `false` for public registry |
-| `init_args` | jsonb | Default initialization arguments (e.g., `[]`) |
+| `init_args` | jsonb | Default initialization arguments `[{""name"": ""port"", ""type"": ""str""}]` or nested object (see below) |
 | `is_original_developer` | boolean | `true` or `false` |
-| `connection` | text[] | Connection types (e.g., `USB,Ethernet`) |
-| `start_command` | text | Command to start the module |
+| `connection` | text[] | Connection types (e.g., `USB,IP`) |
+| `start_command` | text | CLI Command to start the module  |
 | `description` | text | Brief description of the module |
-| `python_command` | text | The Python command to run it |
+| `python_command` | text | The extra Python method (e.g., `instrument.connect()`) |
 
+An example of nested `init_args` 
+```
+from ftdi_serial import Serial
+from vicivalve import VICI
+
+serial = Serial(device_serial='FOO')
+valve = VICI(serial=serial)
+```
+```json
+[
+  {
+    "args": [
+      {
+        "name": "device_serial",
+        "type": "str"
+      }
+    ],
+    "name": "serial",
+    "type": "object",
+    "class_name": "Serial",
+    "import_path": "ftdi_serial"
+  },
+  {
+    "name": "address",
+    "type": "int"
+  }
+]
+```
 **Final Output**: Present your evaluation report detailing your findings for Step 1 and Step 2. If the repository is compatible, conclude with the Step 3 CSV block containing the extracted schema data.
 
 ### Example CSV Output
